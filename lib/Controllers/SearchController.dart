@@ -1,9 +1,8 @@
 import 'dart:convert';
 
-import 'package:movieapp/Models/Keywords.dart';
-import 'package:movieapp/Models/Movies.dart';
+import 'package:Filmler/Models/Keywords.dart';
+import 'package:Filmler/Models/Movies.dart';
 
-import '../Models/Movies.dart';
 import 'package:http/http.dart' as http;
 
 //Response Data Class

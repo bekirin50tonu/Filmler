@@ -1,9 +1,9 @@
 import 'dart:async';
 
-import 'package:movieapp/Controllers/TopRatedController.dart';
+import 'package:Filmler/Controllers/TopRatedController.dart';
+import 'package:Filmler/Models/Movies.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:movieapp/Models/Movies.dart';
 
 import '../MovieListView.dart';
 

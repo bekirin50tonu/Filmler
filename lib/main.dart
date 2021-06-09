@@ -1,7 +1,6 @@
-import 'package:movieapp/Views/FutureBuilders/PlayingBuilderViewer.dart';
-import 'package:movieapp/Views/FutureBuilders/SearchBuilder.dart';
-import 'package:movieapp/Views/FutureBuilders/TopRatedBuilderViewer.dart';
-import 'package:movieapp/Views/FutureBuilders/UpcomingBuilderViewer.dart';
+import 'package:Filmler/Views/FutureBuilders/PlayingBuilderViewer.dart';
+import 'package:Filmler/Views/FutureBuilders/TopRatedBuilderViewer.dart';
+import 'package:Filmler/Views/FutureBuilders/UpcomingBuilderViewer.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
