@@ -50,10 +50,12 @@ class MovieDataViewer extends StatelessWidget {
                         child: Center(
                           child: ListTile(
                               title: Text(data.results[index].title,
-                                  style: TextStyle(fontSize: 25)),
+                                  style: TextStyle(
+                                      fontSize: 25, color: Colors.grey)),
                               subtitle: Text(
                                 '${data.results[index].release_date != "" ? DateFormat("dd/MM/yyyy").format(DateTime.parse(data.results[index].release_date)) : data.results[index].release_date}',
-                                style: TextStyle(fontSize: 15),
+                                style:
+                                    TextStyle(fontSize: 15, color: Colors.grey),
                               )),
                         ),
                       ),
