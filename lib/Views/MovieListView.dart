@@ -1,0 +1,64 @@
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:movieapp/Controllers/GentresController.dart';
+import 'package:movieapp/Models/Genres.dart';
+import 'package:movieapp/Models/Movies.dart';
+
+import 'MovieDetailView.dart';
+
+// ignore: must_be_immutable
+class MovieDataViewer extends StatelessWidget {
+  final Movies data;
+  final int index;
+  MovieDataViewer({Key key, @required this.data, @required this.index})
+      : super(key: key);
+  var getGenresController = GenresController();
+  @override
+  Widget build(BuildContext context) {
+    Genres genres = getGenresController.getValue();
+    return InkWell(
+        onTap: () => Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => DataRoute(
+                    data: data.results[index],
+                    controller: getGenresController,
+                    genres: genres))),
+        child: Column(children: [
+          Card(
+              color: Colors.black87,
+              child: Padding(
+                padding: EdgeInsets.symmetric(vertical: 10),
+                child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Container(
+                        decoration: BoxDecoration(
+                          border: Border.all(color: Colors.black, width: 8),
+                        ),
+                        child: CachedNetworkImage(
+                          imageUrl: data.results[index].poster_path,
+                          placeholder: (context, url) =>
+                              new CircularProgressIndicator(),
+                          errorWidget: (context, url, error) =>
+                              new Icon(Icons.error),
+                        ),
+                      ),
+                      Container(
+                        child: Center(
+                          child: ListTile(
+                              title: Text(data.results[index].title,
+                                  style: TextStyle(fontSize: 25)),
+                              subtitle: Text(
+                                '${data.results[index].release_date != "" ? DateFormat("dd/MM/yyyy").format(DateTime.parse(data.results[index].release_date)) : data.results[index].release_date}',
+                                style: TextStyle(fontSize: 15),
+                              )),
+                        ),
+                      ),
+                    ]),
+              ))
+        ]));
+  }
+}
