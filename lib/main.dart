@@ -1,16 +1,14 @@
-import 'package:movieapp/Views/FutureBuilders/PlayingBuilderViewer.dart';
-import 'package:movieapp/Views/FutureBuilders/SearchBuilder.dart';
-import 'package:movieapp/Views/FutureBuilders/TopRatedBuilderViewer.dart';
-import 'package:movieapp/Views/FutureBuilders/UpcomingBuilderViewer.dart';
+import 'package:Filmler/Controllers/GentresController.dart';
+import 'package:Filmler/Controllers/UpcomingController.dart';
+import 'package:Filmler/Models/Genres.dart';
+import 'package:Filmler/Models/Movies.dart';
+import 'package:Filmler/Views/FutureBuilders/PlayingBuilderViewer.dart';
+import 'package:Filmler/Views/FutureBuilders/PopularBuilderViewer.dart';
+import 'package:Filmler/Views/FutureBuilders/SearchBuilder.dart';
+import 'package:Filmler/Views/FutureBuilders/TopRatedBuilderViewer.dart';
+import 'package:Filmler/Views/FutureBuilders/UpcomingBuilderViewer.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-
-import 'Controllers/GentresController.dart';
-import 'Controllers/UpcomingController.dart';
-import 'Models/Genres.dart';
-import 'Models/Movies.dart';
-import 'Views/FutureBuilders/PopularBuilderViewer.dart';
-import 'Views/FutureBuilders/SearchBuilder.dart';
 
 void main() {
   runApp(MyApp());

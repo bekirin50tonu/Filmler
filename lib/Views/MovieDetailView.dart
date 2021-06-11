@@ -1,6 +1,6 @@
+import 'package:Filmler/Controllers/GentresController.dart';
+import 'package:Filmler/Models/Genres.dart';
 import 'package:intl/intl.dart';
-import 'package:movieapp/Controllers/GentresController.dart';
-import 'package:movieapp/Models/Genres.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

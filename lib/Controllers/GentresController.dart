@@ -1,9 +1,7 @@
 import 'dart:convert';
 
-import 'package:movieapp/Models/Genres.dart';
-import 'package:movieapp/Models/Movies.dart';
-
-import '../Models/Movies.dart';
+import 'package:Filmler/Models/Genres.dart';
+import 'package:Filmler/Models/Movies.dart';
 import 'package:http/http.dart' as http;
 
 //Response Data Class
@@ -51,6 +49,7 @@ class GenresController {
     print(error);
     return error;
   }
+
   //Methods
   Genres parseGenres(String responseBody) {
     final parsed = jsonDecode(responseBody);

@@ -1,11 +1,10 @@
 import 'dart:async';
 
-import 'package:movieapp/Controllers/PlayingController.dart';
+import 'package:Filmler/Controllers/PlayingController.dart';
+import 'package:Filmler/Models/Movies.dart';
+import 'package:Filmler/Views/MovieListView.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:movieapp/Models/Movies.dart';
-
-import '../MovieListView.dart';
 
 class PlayingFutureBuilderView extends StatefulWidget {
   PlayingFutureBuilderView({Key key}) : super(key: key);

@@ -1,7 +1,7 @@
 import 'dart:async';
 
-import 'package:movieapp/Controllers/UpcomingController.dart';
-import 'package:movieapp/Models/Movies.dart';
+import 'package:Filmler/Controllers/UpcomingController.dart';
+import 'package:Filmler/Models/Movies.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
