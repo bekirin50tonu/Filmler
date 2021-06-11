@@ -21,7 +21,7 @@ class TopRatedController {
     print("Page:" + page);
     this.page = page;
     String url =
-        "https://api.themoviedb.org/3/movie/top_rated?api_key=${this.apikey}&language=tr-TR&page=${this.page}&region=TR";
+        "https://api.themoviedb.org/3/movie/top_rated?api_key=${this.apikey}&language=tr-TR&page=${this.page}&region=tr";
     final response = await http.get(
       Uri.parse(url),
     );

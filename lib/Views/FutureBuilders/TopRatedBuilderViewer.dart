@@ -25,6 +25,10 @@ class _TopRatedFutureBuilderViewState extends State<TopRatedFutureBuilderView> {
   List<Movies> _items = <Movies>[];
   int _count = 0;
 
+  var _maxResults = 0;
+
+  int _maxPage = 1;
+
   @override
   void dispose() {
     print("Dispose olmak");
@@ -36,12 +40,17 @@ class _TopRatedFutureBuilderViewState extends State<TopRatedFutureBuilderView> {
   @override
   void initState() {
     this.topratedController = TopRatedController();
-    _fetchMovies(this.currentPage.toString());
+    _fetchMovies(currentPage.toString());
     _scrollController.addListener(() {
       if (_scrollController.position.pixels ==
-          _scrollController.position.maxScrollExtent) {
-        this.currentPage++;
-        _fetchMovies(this.currentPage.toString());
+              _scrollController.position.maxScrollExtent &&
+          currentPage < _maxPage) {
+        currentPage = currentPage < _maxPage ? currentPage + 1 : _maxPage;
+        print("SEARCHVALUE: " +
+            currentPage.toString() +
+            "\nMaxPage: " +
+            _maxPage.toString());
+        _fetchMovies(currentPage.toString());
       }
     });
     super.initState();
@@ -49,8 +58,11 @@ class _TopRatedFutureBuilderViewState extends State<TopRatedFutureBuilderView> {
 
   Future<void> _fetchMovies(String search) async {
     String value = search;
+    print("SEARCHVALUE: " + search);
     var items = await topratedController.fetchDatas(value);
-    _count += items.results.length;
+    _maxResults = items.total_results;
+    _maxPage = items.total_pages;
+    _count = _count < _maxResults ? _count + items.results.length : _maxResults;
     print(_count);
     if (items == null) return;
     _items.add(items);
@@ -68,6 +80,7 @@ class _TopRatedFutureBuilderViewState extends State<TopRatedFutureBuilderView> {
         builder: (context, AsyncSnapshot<List<Movies>> snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.none:
+              return noConnection(context);
             case ConnectionState.waiting:
               return Center(
                   child: Column(
@@ -75,7 +88,7 @@ class _TopRatedFutureBuilderViewState extends State<TopRatedFutureBuilderView> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   CircularProgressIndicator(),
-                  Text("Yüklenmek..."),
+                  Text("Yükleniyor..."),
                 ],
               ));
             case ConnectionState.active:
@@ -109,6 +122,12 @@ class _TopRatedFutureBuilderViewState extends State<TopRatedFutureBuilderView> {
         },
       ),
     );
+  }
+
+  Widget noConnection(BuildContext context) {
+    return Container(
+        alignment: Alignment.bottomCenter,
+        child: Text("Bağlantı Sağlanamadı!"));
   }
 
   Future<void> _refreshBuilder() async {

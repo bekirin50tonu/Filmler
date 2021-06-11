@@ -29,6 +29,10 @@ class _SearchBuilder extends State<SearchBuilder> {
   Movies movies;
   Keywords keywords;
 
+  var _maxResults = 0;
+
+  int _maxPage = 0;
+
   //Future<Movies> data;
 
   @override
@@ -45,8 +49,9 @@ class _SearchBuilder extends State<SearchBuilder> {
     this.keywordsController = KeywordsController();
     _scrollController.addListener(() {
       if (_scrollController.position.pixels ==
-          _scrollController.position.maxScrollExtent) {
-        this.currentPage++;
+              _scrollController.position.maxScrollExtent &&
+          currentPage < _maxPage) {
+        currentPage = currentPage < _maxPage ? currentPage + 1 : _maxPage;
         _fetchMovies(this.searchText, currentPage);
       }
     });
@@ -56,7 +61,9 @@ class _SearchBuilder extends State<SearchBuilder> {
   Future<void> _fetchMovies(String search, int page) async {
     String value = search;
     var items = await searchController.fetchMovies(value, page);
-    _count += items.results.length;
+    _maxResults = items.total_results;
+    _maxPage = items.total_pages;
+    _count = _count < _maxResults ? _count + items.results.length : _maxResults;
     print("İtem:" + items.results.length.toString());
     print("İtem:" + items.results[0].toString());
     if (items == null) return;
@@ -117,13 +124,14 @@ class _SearchBuilder extends State<SearchBuilder> {
 
                   switch (snapshot.connectionState) {
                     case ConnectionState.none:
+                      return noConnection(context);
                     case ConnectionState.waiting:
                       return Center(
                           child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           CircularProgressIndicator(),
-                          Text("Yüklenmek"),
+                          Text("Yükleniyor..."),
                         ],
                       ));
                     case (ConnectionState.done):
@@ -160,6 +168,12 @@ class _SearchBuilder extends State<SearchBuilder> {
         ),
       ],
     );
+  }
+
+  Widget noConnection(BuildContext context) {
+    return Container(
+        alignment: Alignment.bottomCenter,
+        child: Text("Bağlantı Sağlanamadı!"));
   }
 
   Future<void> _refreshBuilder() async {

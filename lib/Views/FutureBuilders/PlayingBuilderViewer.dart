@@ -24,6 +24,8 @@ class _PlayingFutureBuilderViewState extends State<PlayingFutureBuilderView> {
   ScrollController _scrollController = ScrollController();
   List<Movies> _items = <Movies>[];
   int _count = 0;
+  int _maxResults = 0;
+  int _maxPage = 0;
 
   @override
   void dispose() {
@@ -39,8 +41,9 @@ class _PlayingFutureBuilderViewState extends State<PlayingFutureBuilderView> {
     _fetchMovies(this.currentPage.toString());
     _scrollController.addListener(() {
       if (_scrollController.position.pixels ==
-          _scrollController.position.maxScrollExtent) {
-        this.currentPage++;
+              _scrollController.position.maxScrollExtent &&
+          currentPage < _maxPage) {
+        currentPage = currentPage < _maxPage ? currentPage + 1 : _maxPage;
         _fetchMovies(this.currentPage.toString());
       }
     });
@@ -50,8 +53,13 @@ class _PlayingFutureBuilderViewState extends State<PlayingFutureBuilderView> {
   Future<void> _fetchMovies(String search) async {
     String value = search;
     var items = await playingController.fetchDatas(value);
-    _count += items.results.length;
-    print(_count);
+    _maxResults = items.total_results;
+    _maxPage = items.total_pages;
+    _count = _count < _maxResults ? _count + items.results.length : _maxResults;
+    print("ItemCount: " +
+        _count.toString() +
+        "\nTotalResults: " +
+        _maxResults.toString());
     if (items == null) return;
     _items.add(items);
     _streamController.add(_items);
@@ -68,6 +76,7 @@ class _PlayingFutureBuilderViewState extends State<PlayingFutureBuilderView> {
         builder: (context, AsyncSnapshot<List<Movies>> snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.none:
+              return noConnection(context);
             case ConnectionState.waiting:
               return Center(
                   child: Column(
@@ -75,7 +84,7 @@ class _PlayingFutureBuilderViewState extends State<PlayingFutureBuilderView> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   CircularProgressIndicator(),
-                  Text("Yüklenmek..."),
+                  Text("Yükleniyor..."),
                 ],
               ));
             case ConnectionState.active:
@@ -109,6 +118,12 @@ class _PlayingFutureBuilderViewState extends State<PlayingFutureBuilderView> {
         },
       ),
     );
+  }
+
+  Widget noConnection(BuildContext context) {
+    return Container(
+        alignment: Alignment.bottomCenter,
+        child: Text("Bağlantı Sağlanamadı!"));
   }
 
   Future<void> _refreshBuilder() async {

@@ -25,6 +25,10 @@ class _PopularFutureBuilderViewState extends State<PopularFutureBuilderView> {
   List<Movies> _items = <Movies>[];
   int _count = 0;
 
+  var _maxResults = 0;
+
+  var _maxPage = 0;
+
   @override
   void dispose() {
     print("Dispose olmak");
@@ -39,8 +43,9 @@ class _PopularFutureBuilderViewState extends State<PopularFutureBuilderView> {
     _fetchMovies(this.currentPage.toString());
     _scrollController.addListener(() {
       if (_scrollController.position.pixels ==
-          _scrollController.position.maxScrollExtent) {
-        this.currentPage++;
+              _scrollController.position.maxScrollExtent &&
+          currentPage < _maxPage) {
+        currentPage = currentPage < _maxPage ? currentPage + 1 : _maxPage;
         _fetchMovies(this.currentPage.toString());
       }
     });
@@ -49,9 +54,17 @@ class _PopularFutureBuilderViewState extends State<PopularFutureBuilderView> {
 
   Future<void> _fetchMovies(String search) async {
     String value = search;
+    print("SEARCHVALUE: " + search);
     var items = await popularController.fetchDatas(value);
-    _count += items.results.length;
-    print(_count);
+    _maxResults = items.total_results;
+    _maxPage = items.total_pages;
+    _count = _count < _maxResults ? _count + items.results.length : _maxResults;
+    print("ItemCount: " +
+        _count.toString() +
+        "\nTotalResults: " +
+        _maxResults.toString() +
+        "\nTotalPages: " +
+        _maxPage.toString());
     if (items == null) return;
     _items.add(items);
     _streamController.add(_items);
@@ -68,6 +81,7 @@ class _PopularFutureBuilderViewState extends State<PopularFutureBuilderView> {
         builder: (context, AsyncSnapshot<List<Movies>> snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.none:
+              return noConnection(context);
             case ConnectionState.waiting:
               return Center(
                   child: Column(
@@ -75,7 +89,7 @@ class _PopularFutureBuilderViewState extends State<PopularFutureBuilderView> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   CircularProgressIndicator(),
-                  Text("Yüklenmek..."),
+                  Text("Yükleniyor..."),
                 ],
               ));
             case ConnectionState.active:
@@ -109,6 +123,12 @@ class _PopularFutureBuilderViewState extends State<PopularFutureBuilderView> {
         },
       ),
     );
+  }
+
+  Widget noConnection(BuildContext context) {
+    return Container(
+        alignment: Alignment.bottomCenter,
+        child: Text("Bağlantı Sağlanamadı!"));
   }
 
   Future<void> _refreshBuilder() async {
