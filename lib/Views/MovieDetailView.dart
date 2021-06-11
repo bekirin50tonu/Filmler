@@ -31,6 +31,9 @@ class _DataRouteState extends State<DataRoute> {
 
   @override
   Widget build(BuildContext context) {
+    var textColor = MediaQuery.of(context).platformBrightness == Brightness.dark
+        ? Colors.white
+        : Colors.white;
     return Scaffold(
       resizeToAvoidBottomInset: true,
       appBar: AppBar(
@@ -68,6 +71,7 @@ class _DataRouteState extends State<DataRoute> {
                   child: Column(children: [
                     Text(widget.data.original_title,
                         style: TextStyle(
+                            color: textColor,
                             fontWeight: FontWeight.bold,
                             height: 2,
                             fontSize: 20)),
@@ -76,22 +80,30 @@ class _DataRouteState extends State<DataRoute> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         ListTile(
-                            title: Text("Konusu:"),
-                            subtitle: Text(widget.data.overview)),
+                            title: Text("Konusu:",
+                                style: TextStyle(color: textColor)),
+                            subtitle: Text(widget.data.overview,
+                                style: TextStyle(color: textColor))),
                         ListTile(
-                            title: Text("Orijinal Dili"),
-                            subtitle: Text(widget.data.original_language)),
+                            title: Text("Orijinal Dili",
+                                style: TextStyle(color: textColor)),
+                            subtitle: Text(widget.data.original_language,
+                                style: TextStyle(color: textColor))),
                         ListTile(
-                            title: Text("Çıkış Tarihi"),
+                            title: Text("Çıkış Tarihi",
+                                style: TextStyle(color: textColor)),
                             subtitle: Text(
-                                '${widget.data.release_date != "" ? DateFormat("dd/MM/yyyy").format(DateTime.parse(widget.data.release_date)) : widget.data.release_date}')),
+                                '${widget.data.release_date != "" ? DateFormat("dd/MM/yyyy").format(DateTime.parse(widget.data.release_date)) : widget.data.release_date}',
+                                style: TextStyle(color: textColor))),
                         ListTile(
                             title: Text("Oy Ortalaması",
+                                style: TextStyle(color: textColor),
                                 textAlign: TextAlign.center),
                             subtitle: Column(children: [
                               _rateStar(widget.data.voteAverage),
                               Text(
-                                  "${widget.data.voteAverage}/${widget.data.vote_count}")
+                                  "${widget.data.voteAverage}/${widget.data.vote_count}",
+                                  style: TextStyle(color: textColor))
                             ]))
                       ],
                     )),
@@ -102,14 +114,17 @@ class _DataRouteState extends State<DataRoute> {
                             style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 height: 2,
-                                fontSize: 20)),
+                                fontSize: 20,
+                                color: textColor)),
                         ListView.builder(
                             physics: const NeverScrollableScrollPhysics(),
                             shrinkWrap: true,
                             itemCount: genre.length,
                             // ignore: missing_return
                             itemBuilder: (context, index) {
-                              return ListTile(title: Text(genre[index].name));
+                              return ListTile(
+                                  title: Text(genre[index].name,
+                                      style: TextStyle(color: textColor)));
                             }),
                       ],
                     ))

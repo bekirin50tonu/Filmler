@@ -3,10 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="f926db06-41a4-4a63-a393-0a41ea30ea5e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.flutter-plugins-dependencies" beforeDir="false" afterPath="$PROJECT_DIR$/.flutter-plugins-dependencies" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/movieapp_android.iml" beforeDir="false" afterPath="$PROJECT_DIR$/android/movieapp_android.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Views/MovieListView.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Views/MovieListView.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,6 +46,10 @@
       <screen x="0" y="30" width="1920" height="1050" />
     </state>
     <state x="845" y="417" key="#Notifications/0.30.1920.1050@0.30.1920.1050" timestamp="1623269201337" />
+    <state x="100" y="130" width="1720" height="850" key="AVDManager" timestamp="1623415827361">
+      <screen x="0" y="30" width="1920" height="1050" />
+    </state>
+    <state x="100" y="130" width="1720" height="850" key="AVDManager/0.30.1920.1050@0.30.1920.1050" timestamp="1623415827361" />
     <state x="440" y="129" key="SettingsEditor" timestamp="1623269575035">
       <screen x="0" y="30" width="1920" height="1050" />
     </state>
