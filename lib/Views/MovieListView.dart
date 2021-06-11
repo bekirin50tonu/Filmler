@@ -38,9 +38,6 @@ class MovieDataViewer extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Container(
-                        decoration: BoxDecoration(
-                          border: Border.all(color: Colors.black, width: 8),
-                        ),
                         child: CachedNetworkImage(
                           imageUrl: data.results[index].poster_path,
                           placeholder: (context, url) =>

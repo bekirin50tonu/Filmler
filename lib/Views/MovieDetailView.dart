@@ -146,7 +146,7 @@ class _DataRouteState extends State<DataRoute> {
         (index) => index < _voteCount / 2
             ? Icon(
                 Icons.star,
-                color: Colors.green,
+                color: Colors.yellow,
               )
             : Icon(Icons.star_border_outlined, color: Colors.yellow));
     return Row(mainAxisAlignment: MainAxisAlignment.center, children: stars);
