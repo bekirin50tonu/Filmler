@@ -42,7 +42,7 @@ class _DataRouteState extends State<DataRoute> {
         decoration: BoxDecoration(
           image: DecorationImage(
             image: NetworkImage(widget.data.backdrop_path == null
-                ? Colors.black
+                ? null
                 : baseUrl + widget.data.backdrop_path),
             fit: BoxFit.cover,
           ),
