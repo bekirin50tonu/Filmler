@@ -42,14 +42,16 @@ class _DataRouteState extends State<DataRoute> {
       ),
       backgroundColor: Colors.black54,
       body: Container(
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: NetworkImage(widget.data.backdrop_path == null
-                ? Colors.black
-                : baseUrl + widget.data.backdrop_path),
-            fit: BoxFit.cover,
-          ),
-        ),
+        decoration: widget.data.backdrop_path != null
+            ? BoxDecoration(
+                image: DecorationImage(
+                  image: NetworkImage(widget.data.backdrop_path == null
+                      ? Colors.black
+                      : baseUrl + widget.data.backdrop_path),
+                  fit: BoxFit.cover,
+                ),
+              )
+            : BoxDecoration(color: Colors.grey.shade800),
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 2.0, horizontal: 8.0),
           child: Container(
