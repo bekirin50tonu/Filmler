@@ -38,4 +38,3 @@ Moderatör : Şilan Dersu Kılıç
 
 
 Not: Video ile ilgili görüş ve önerilerinizi, yorumlar kısmında belirtirseniz seviniriz.
-
